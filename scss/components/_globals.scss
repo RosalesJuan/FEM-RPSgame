@@ -13,10 +13,14 @@
   @return ($pixels / $context) * 1rem;
 }
 
-body{
+section{
   height: 100vh;
-  background: linear-gradient($radialgradient, $radialgradient2);
+  background: linear-gradient($radialgradient, $radialgradient2),
+  linear-gradient(to right, $radialgradient2, $radialgradient),
+  linear-gradient(to left, $radialgradient2, $radialgradient)   ;
   padding: rem(45) rem(30) rem(90) rem(35);
   display: flex;
+  flex-direction: column;
   position: relative;
+  z-index: 9999;
 }

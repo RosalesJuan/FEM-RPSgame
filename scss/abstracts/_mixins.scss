@@ -1,3 +1,24 @@
+
+@use '../components/color' as *;
+
 @function rem($pixels, $context: 16){
   @return ($pixels / $context) * 1rem;
+}
+
+
+@mixin rps-border-container{
+  content: "";
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  z-index: -1;
+  border-radius: inherit; /* !importanté */
+}
+
+@mixin rps-inner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
 }

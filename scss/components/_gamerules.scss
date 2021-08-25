@@ -5,15 +5,25 @@
 
 .rules-container{
   position: absolute;
-  left: -1000px;
-  transition: all 0.5s ease-in-out;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -99;
+  transition: all 0.35s ease-in-out;
   div{
+    position: absolute;
+    top: -100%;
+    left: -100%;
+    z-index: -99;
     background: #fff;
+    transition: all 0.35s ease-in-out;
     display: grid;
-    padding: rem(34);
+    width: max-content;
+    padding: rem(33) rem(40);
     border-radius: rem(12);
     grid-template-columns: 1fr 2fr;
-    grid-template-rows:minmax(rem(16), max-content);
+    grid-template-rows: minmax(rem(16), max-content);
     p{
       font-size: rem(26);
       font-weight: bold;
@@ -33,18 +43,23 @@
 }
 
 .rules-container.active{
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  z-index: 1;
+  background-color: hsla(237, 49%, 5%, 0.7);
+  div{
+    z-index: 999;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
 
 .rules-button{
+  z-index: 0;
   position: relative;
   height: max-content;
   width: max-content;
-  top: 92%;
-  left: 89.5%;
   cursor: pointer;
+  left: 89%;
   button{
     letter-spacing: 2px;
     background: transparent;

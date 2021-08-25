@@ -14,32 +14,56 @@
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
 </head>
 <body>
-  <div class="rules-container">
-    <div>
-      <p>RULES</p>
-      <img class= "close-button" id="open-close-btn" src="./images/icon-close.svg" alt="close button">
-      <img class= "img-container" src="./images/image-rules.svg" alt="game rules">
+  <section>
+    <div class="rules-container">
+      <div>
+        <p>RULES</p>
+        <img class= "close-button" id="open-close-btn" src="./images/icon-close.svg" alt="close button">
+        <img class= "img-container" src="./images/image-rules.svg" alt="game rules">
+      </div>
     </div>
-  </div>
 
-  <div>
+    <div class="score-table">      
+      <div>
+        <p>ROCK <br> PAPER <br> SCISSORS</p>
+      </div>
+      <div class="score-card">
+        <div>
+          <p>SCORE</p>
+        </div>
+        <div class="show-score">0</div>
+      </div>
+    </div>
 
-  </div>
-
-  <div>
-
-  </div>
-
-  <div class="rules-button">
-    <button id="open-close-btn">
-      RULES
-    </button>
-  </div>
-<!--   
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
-  </div> -->
-  <script src="./js/script.js"></script>
+    <div class="play-game">
+      <div class="who-picks">
+        <p>YOU PICKED</p>
+        <p>THE HOUSE PICKED</p>
+      </div>
+      <div class="paper container" id="rps-button">
+         <div><img src="./images/icon-paper.svg" alt="hand image"></div>
+      </div>
+      <div class="scissors container" id="rps-button">
+         <div><img src="./images/icon-scissors.svg" alt="hand scissor shaper"></div>
+      </div>
+      <div class="rock container " id="rps-button">
+         <div><img src="./images/icon-rock.svg" alt="hand rock shape"></div>
+      </div>
+      <div id="computer-choice"></div>
+      <div id="play-again-btn"><button>PLAY AGAIN</button></div>
+    </div>
+    
+    <div class="rules-button">
+      <button id="open-close-btn">
+        RULES
+      </button>
+    </div>
+    <!--
+    <div class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>.
+      Coded by <a href="#">Your Name Here</a>.
+    </div> -->
+    <script src="./js/script.js"></script>
+  </section>
 </body>
 </html>

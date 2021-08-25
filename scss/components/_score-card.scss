@@ -1,0 +1,36 @@
+@use '../abstracts/' as *;
+@use './color' as *;
+
+.score-table{
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  color: $white;
+  padding: rem(21) rem(26) rem(21) rem(36);
+  border: 2.5px solid $headeroutline;
+  border-radius: rem(16); 
+  width: 59%;
+  max-width:100%;
+  div p{
+    line-height: rem(22);
+    font-size: rem(34);
+    }
+  .score-card{
+    background: $white;
+    color: $scoretext;
+    border-radius: rem(8);
+    padding: rem(21) rem(51) rem(16);
+    letter-spacing: rem(2);
+    div p{
+      font-size: rem(18);
+    }
+    .show-score{
+      display: flex;
+      font-size: rem(51);
+      color: $darktext;
+      justify-content: center;
+    }
+  }
+}
