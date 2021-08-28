@@ -3,21 +3,14 @@
 
 .play-game{
   display: grid;
-  grid-template-columns: 1fr 1fr auto;
-  grid-template-rows: 1fr 1fr;
-  width: max-content;
+  grid-auto-columns: 1fr 1fr minmax(min-content, max-content);
+  grid-auto-rows: minmax(min-content, max-content);
   margin: 0 auto;
   padding-top: rem(66);
   gap: rem(25) rem(66);
   background: url('/images/bg-triangle.svg') no-repeat center;
   z-index: -2;
-  .who-picks{
-     display: none;
-    p{
-       color: $white;
-       font-size: rem(22);
-    }
-  }
+  //transition: all 0.35s ease-in-out;
   .container{
     background: $white;
     height: rem(214);
@@ -66,11 +59,27 @@
       border-bottom: solid rem(10) hsl(230, 86%, 54%);
     }
   }
+  .who-picks{
+    display: none;
+    p{
+      color: $white;
+      font-size: rem(22);
+      padding-bottom: rem(60);
+    }
+  }
+  #computer-choice{
+    display: flex;
+    color: $white;
+    font-size: rem(36);
+    justify-content: center;
+    align-items: center;
+  }
   #play-again-btn{
      display: none;
-     grid-area: 2 / 2 / 3 / 3;
+     //grid-area: 2 / 2 / 3 / 3;
+     text-align: center;
      button{
-        transition: all 0.3s ease-in-out;
+        //transition: all 0.35s ease-in-out;
         font-size: rem(14);
         color: $darktext;
         letter-spacing: rem(3.5);
@@ -81,6 +90,11 @@
      }
      button:hover{
         color: $rockgradient;
+     }
+     h1{
+       color: $white;
+       font-size: rem(46);
+       padding-bottom: rem(18)
      }
   }
 }
@@ -97,14 +111,6 @@
   } 
 }
 
-.play-game .who-picks{
-  display: none;
- p{
-   color: $white;
-   font-size: rem(22)
- }
-}
-
 //-----Active States----------
 
 .play-game .rock.not-picked,
@@ -116,40 +122,54 @@
 .play-game .rock.yes-picked,
 .play-game .scissors.yes-picked,
 .play-game .paper.yes-picked{
+  border: none; 
   grid-area: 2 / 1 / 3 / 2;
-
-  //transform: scale(1.1) translateX(20px)
+  div img{
+    transform: scale(2);
+  }
 } 
 .play-game .rock.winner,
 .play-game .scissors.winner,
 .play-game .paper.winner{
-  display: block;
-  grid-area: 2 / 2 / 3 / 3;
-
-  //transform: scale(1.1) translateX(20px)
+  display: block; 
+  border: none;
+  grid-area: 2 / 3 / 3 / 4;
+  div img{
+    transform: scale(2);
+  }
 } 
+
+// .play-game .scissors.winner::before{
+//   background: linear-gradient($scissorsgradient2, $scissorsgradient);
+//   border-bottom: solid rem(10) hsl(34, 89%, 38%);
+// }
 
 .play-game.yes-picked{
   background-image: none;
   padding-top: rem(172);
+  column-gap: rem(75);
   #computer-choice{
     background: $radialgradient2;
     padding: rem(10) rem(10);
     border-radius: 50%;
-    grid-area: 2 / 2 / 3 / 3;
+  grid-area: 2 / 3 / 3 / 4;
   }
 }
 
 
 .play-game .who-picks.yes-picked{
    display: inherit;
-   grid-template-columns: 1fr 1fr;
+   grid-template-columns: 1fr 1fr 1fr;
    grid-gap: inherit;
    text-align: center;
-   grid-area: 1 / 1 / 2 / 3;
+   height: max-content;
+   grid-area: 1 / 1 / 2 / 4;
+   p:nth-child(2){
+     grid-area: 1 / 3 / 2 / 4;
+   }
 }
 
 .play-game #play-again-btn.yes-picked{
    display: block;
-   grid-area: 2 / 2 / 3 / 4;
+   grid-area: 2 / 2 / 3 / 3;
 }

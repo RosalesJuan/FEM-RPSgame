@@ -14,7 +14,7 @@
   <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
 </head>
 <body>
-  <section>
+  <section id="parent-all">
     <div class="rules-container">
       <div>
         <p>RULES</p>
@@ -35,22 +35,25 @@
       </div>
     </div>
 
-    <div class="play-game">
-      <div class="who-picks">
+    <div class="play-game to-reset" id="parent-all">
+      <div class="who-picks to-reset">
         <p>YOU PICKED</p>
         <p>THE HOUSE PICKED</p>
       </div>
-      <div class="paper container" id="rps-button">
+      <div class="paper container to-reset" id="rps-button">
          <div><img src="./images/icon-paper.svg" alt="hand image"></div>
       </div>
-      <div class="scissors container" id="rps-button">
-         <div><img src="./images/icon-scissors.svg" alt="hand scissor shaper"></div>
+      <div class="scissors container to-reset" id="rps-button">
+         <div><img src="./images/icon-scissors.svg" alt="hand scissor shape"></div>
       </div>
-      <div class="rock container " id="rps-button">
+      <div class="rock container to-reset" id="rps-button">
          <div><img src="./images/icon-rock.svg" alt="hand rock shape"></div>
       </div>
-      <div id="computer-choice"></div>
-      <div id="play-again-btn"><button>PLAY AGAIN</button></div>
+      <div id="computer-choice" class="to-reset"></div>
+      <div id="play-again-btn" class="to-reset">
+        <h1 id="lose-win"></h1>
+        <button id="press-play-btn">PLAY AGAIN</button>
+      </div>
     </div>
     
     <div class="rules-button">

@@ -16,81 +16,19 @@ rulesButtons.forEach(button => {
 //------------------------RPS BUTTONS---------------------------------
 
 
-class rpsGame{
-  constructor(){
-    this.score = 0
-    this.choice = undefined
-    this.computerChoice = undefined
-    // this.rock = 1
-    // this.paper = 2
-    // this.scissor = 3
-  }
-  randomGenerator() {
-    let num = Math.floor(Math.random() * 3);
-    if (num === 0) return 'rock'
-    else if (num === 1) return 'paper'
-    else return 'scissor'
-  }
-  
-  updateDisplay(){
-  }
-  
-  updateScore() {
-
-  }
-
-  playTheGame(string){
-    // 0 = rock, 1 = paper, 2 =scissor
-    //this.computerChoice =  this.randomGenerator()
-    //this.choice = string
-    console.log(this.computerChoice)
-    switch(this.choice){
-      case 0:
-        if(this.choice === this.computerChoice){
-          return 0
-        } else if (this.computerChoice === 1){
-          return 1
-        }
-        else{
-          return 2
-        }
-        break;
-      case 1:
-        if(this.choice === this.computerChoice){
-          console.log('draw')
-        } else if (this.computerChoice === 2){
-          console.log('lose')
-        }
-        else{
-          console.log('win')
-        }
-        break;
-      case 2:
-        if(this.choice === this.computerChoice){
-          console.log('draw')
-        } else if (this.computerChoice === 0){
-          console.log('loes')
-        }
-        else{
-          console.log('win')
-        }
-        break;
-      default:
-        console.log('nothing')
-    }
-  }
-}
-
-const myGame = new rpsGame()
 const rpsButton = document.querySelectorAll('#rps-button')
 const playGame = document.querySelector('.play-game')
+const parentAll = document.querySelectorAll('#parent-all')
 
 const rockButton = document.querySelector('.rock')
 const paperButton = document.querySelector('.paper')
 const scissorButton = document.querySelector('.scissors')
 const whoPick = document.querySelector('.who-picks')
 const playAgainButton = document.querySelector('#play-again-btn')
-
+const playAgainBtn = document.querySelector('#press-play-btn')
+const computerPlayer = document.querySelector('#computer-choice')
+const loseWin = document.querySelector('#lose-win')
+const showScore = document.querySelector('.show-score')
 
 const selectItem = () =>{
   playGame.classList.add('yes-picked')
@@ -108,83 +46,134 @@ const selectItem = () =>{
 }
 
 const randomRPS = () => {
-  let num = Math.floor(Math.random() * 3);
-  if (num === 0) return 'rock'
-  else if (num === 1) return 'paper'
-  else return 'scissor'
+  let num = Math.floor(Math.random() * 3)
+  if (num === 0) {return 'rock'}
+  else if (num === 1) {return 'paper'}
+  else {return 'scissor'}
 }
 
-const displayGame = (choice) => {
+const chooseWinner = (choice) => {
    // 0 = rock, 1 = paper, 2 =scissor
   const myChoice = choice
   const computerChoice =  randomRPS()
-  //console.log(computerChoice)
-  switch(myChoice){
+  //console.log(`computer chose ${computerChoice}`)
+  switch(computerChoice){
     case 'rock':
       if(myChoice === computerChoice){
         return 'draw'
-      } else if (computerChoice === 'paper'){
-        return 'paper'
-      }
-      else{
+      } else if (myChoice === 'paper'){
         return 'win'
       }
-      break;
+      else{
+        return 'lose'
+      }
     case 'paper':
       if(myChoice === computerChoice){
         return 'draw'
-      } else if (computerChoice === 'scissor'){
-        return 'scissor'
-      }
-      else{
+      } else if (myChoice === 'scissor'){
         return 'win'
       }
-      break;
+      else{
+        return 'lose'
+      }
     case 'scissor':
       if(myChoice === computerChoice){
         return 'draw'
-      } else if (computerChoice === 'rock'){
-        return 'rock'
-      }
-      else{
+      } else if (myChoice === 'rock'){
         return 'win'
       }
-      break;
+      else{
+        return 'lose'
+      }
     default:
       console.log('nothing')
   }
 }
 
-const updateDisplay = (choice) =>{
-  if(choice === 'scissor'){
-    console.log('scissor win')
-  }else if (choice === 'paper'){
-    console.log('paper')
-  }else{
-    console.log('rock')
+const updateDisplay = (myChoice, winner) =>{
+  if(winner === 'draw'){
+    computerPlayer.innerHTML = 'DRAW!'
+  } else if(winner === 'win' && myChoice === 'rock'){
+    scissorButton.classList.remove('not-picked')
+    scissorButton.classList.add('winner')
+    loseWin.innerHTML = 'YOU WIN'
+  } else if(winner === 'win' && myChoice === 'paper'){
+    rockButton.classList.remove('not-picked')
+    rockButton.classList.add('winner')
+    loseWin.innerHTML = 'YOU WIN'
+  } else if(winner === 'win' && myChoice === 'scissor'){
+    paperButton.classList.remove('not-picked')
+    paperButton.classList.add('winner')
+    loseWin.innerHTML = 'YOU WIN'
+  } else if(winner === 'lose' && myChoice === 'rock'){
+    paperButton.classList.remove('not-picked')
+    paperButton.classList.add('winner')
+    loseWin.innerHTML = 'YOU LOSE'
+  } else if(winner === 'lose' && myChoice === 'paper'){
+    scissorButton.classList.remove('not-picked')
+    scissorButton.classList.add('winner')
+    loseWin.innerHTML = 'YOU LOSE'
+  } else if(winner === 'LOSE' && myChoice === 'scissor'){
+    rockButton.classList.remove('not-picked')
+    rockButton.classList.add('winner')
+    loseWin.innerHTML = 'YOU LOSE'
+  }
+  playAgainButton.classList.add('yes-picked')
+}
+
+const toReset = document.querySelectorAll('.to-reset')
+const resetPage = () => {
+  toReset.forEach(n => n.classList.remove('yes-picked'))
+  toReset.forEach(n => n.classList.remove('winner'))
+  toReset.forEach(n => n.classList.remove('not-picked'))
+  computerPlayer.innerHTML = ''
+}
+
+
+const updatePoints = (winner) =>{
+  let points = showScore.innerHTML;
+  if (winner === 'win'){
+    points++;
+    showScore.innerHTML = points
   }
 }
 
-rockButton.addEventListener('click', ()=>{
-  rockButton.classList.add('yes-picked')
-  selectItem()
-  updateDisplay(displayGame('rock'))
-})
 
 
-paperButton.addEventListener('click', ()=>{
-  paperButton.classList.add('yes-picked')
-  selectItem()
-  updateDisplay(displayGame('paper'))
-})
+//while (!rulesButtons.clicked){
+
+  playAgainBtn.addEventListener('click', () =>{ 
+    resetPage()
+    console.log('butto presed')
+  })
+
+  rockButton.addEventListener('click', ()=>{
+    rockButton.classList.add('yes-picked')
+    selectItem();
+    let winner = chooseWinner('rock')
+    updateDisplay('rock', winner)
+    updatePoints(winner)
+    //playAgainBtn.addEventListener('click', resetPage())
+  })
 
 
-scissorButton.addEventListener('click', ()=>{
-  scissorButton.classList.add('yes-picked')
-  selectItem()
-  updateDisplay(displayGame('scissor'))
-})
+  paperButton.addEventListener('click', ()=>{
+    paperButton.classList.add('yes-picked')
+    selectItem()
+    let winner = chooseWinner('paper')
+    updateDisplay('paper', winner)
+    updatePoints(winner)
+  })
 
+
+  scissorButton.addEventListener('click', ()=>{
+    scissorButton.classList.add('yes-picked')
+    selectItem()
+    let winner = chooseWinner('scissor')
+    updateDisplay('scissor', winner)
+    updatePoints(winner)
+  })
+//}
 // rockButton.addEventListener('click', ()=>{
 //    rockButton.classList.add('yes-picked')
 //    paperButton.classList.add('not-picked')
