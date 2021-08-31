@@ -56,7 +56,7 @@ const chooseWinner = (choice) => {
    // 0 = rock, 1 = paper, 2 =scissor
   const myChoice = choice
   const computerChoice =  randomRPS()
-  //console.log(`computer chose ${computerChoice}`)
+  console.log(`computer chose ${computerChoice}`)
   switch(computerChoice){
     case 'rock':
       if(myChoice === computerChoice){
@@ -93,29 +93,36 @@ const chooseWinner = (choice) => {
 const updateDisplay = (myChoice, winner) =>{
   if(winner === 'draw'){
     computerPlayer.innerHTML = 'DRAW!'
+    loseWin.innerHTML = ''
   } else if(winner === 'win' && myChoice === 'rock'){
     scissorButton.classList.remove('not-picked')
     scissorButton.classList.add('winner')
+    rockButton.classList.add('win-animation')
     loseWin.innerHTML = 'YOU WIN'
   } else if(winner === 'win' && myChoice === 'paper'){
     rockButton.classList.remove('not-picked')
     rockButton.classList.add('winner')
+    paperButton.classList.add('win-animation')
     loseWin.innerHTML = 'YOU WIN'
   } else if(winner === 'win' && myChoice === 'scissor'){
     paperButton.classList.remove('not-picked')
     paperButton.classList.add('winner')
+    scissorButton.classList.add('win-animation')
     loseWin.innerHTML = 'YOU WIN'
   } else if(winner === 'lose' && myChoice === 'rock'){
     paperButton.classList.remove('not-picked')
     paperButton.classList.add('winner')
+    paperButton.classList.add('win-animation')
     loseWin.innerHTML = 'YOU LOSE'
   } else if(winner === 'lose' && myChoice === 'paper'){
     scissorButton.classList.remove('not-picked')
     scissorButton.classList.add('winner')
+    scissorButton.classList.add('win-animation')
     loseWin.innerHTML = 'YOU LOSE'
-  } else if(winner === 'LOSE' && myChoice === 'scissor'){
+  } else if(winner === 'lose' && myChoice === 'scissor'){
     rockButton.classList.remove('not-picked')
     rockButton.classList.add('winner')
+    rockButton.classList.add('win-animation')
     loseWin.innerHTML = 'YOU LOSE'
   }
   playAgainButton.classList.add('yes-picked')
@@ -126,6 +133,7 @@ const resetPage = () => {
   toReset.forEach(n => n.classList.remove('yes-picked'))
   toReset.forEach(n => n.classList.remove('winner'))
   toReset.forEach(n => n.classList.remove('not-picked'))
+  toReset.forEach(n => n.classList.remove('win-animation'))
   computerPlayer.innerHTML = ''
 }
 
@@ -138,31 +146,45 @@ const updatePoints = (winner) =>{
   }
 }
 
+// handler function
+const handler = (e) => {
+	// remove this handler
+	e.removeEventListener('click', ()=>{ 
+    updateDisplay('rock', winner) 
+    updatePoints(winner)
+    selectItem()
 
+  })
 
+	//alert("You'll only see this once!");
+}
 //while (!rulesButtons.clicked){
 
   playAgainBtn.addEventListener('click', () =>{ 
-    resetPage()
-    console.log('butto presed')
+      resetPage()
+      console.log('butto presed')
   })
 
   rockButton.addEventListener('click', ()=>{
-    rockButton.classList.add('yes-picked')
-    selectItem();
     let winner = chooseWinner('rock')
-    updateDisplay('rock', winner)
-    updatePoints(winner)
-    //playAgainBtn.addEventListener('click', resetPage())
+    rockButton.classList.add('yes-picked')
+    selectItem()
+    setTimeout( function () {
+      updateDisplay('rock', winner) 
+      updatePoints(winner)
+    }, 1200);
+    //handler(rockButton)
   })
 
 
   paperButton.addEventListener('click', ()=>{
+    let winner = chooseWinner('paper')
     paperButton.classList.add('yes-picked')
     selectItem()
-    let winner = chooseWinner('paper')
-    updateDisplay('paper', winner)
-    updatePoints(winner)
+    setTimeout( function () {
+      updateDisplay('paper', winner) 
+      updatePoints(winner)
+    }, 1200);
   })
 
 
@@ -170,8 +192,10 @@ const updatePoints = (winner) =>{
     scissorButton.classList.add('yes-picked')
     selectItem()
     let winner = chooseWinner('scissor')
-    updateDisplay('scissor', winner)
-    updatePoints(winner)
+    setTimeout( function () {
+      updateDisplay('scissor', winner) 
+      updatePoints(winner)
+    }, 1200);
   })
 //}
 // rockButton.addEventListener('click', ()=>{

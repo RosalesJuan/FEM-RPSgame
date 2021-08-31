@@ -3,14 +3,14 @@
 
 .play-game{
   display: grid;
-  grid-auto-columns: 1fr 1fr minmax(min-content, max-content);
+  grid-auto-columns: 1fr 1fr 1fr;
   grid-auto-rows: minmax(min-content, max-content);
   margin: 0 auto;
   padding-top: rem(66);
   gap: rem(25) rem(66);
   background: url('/images/bg-triangle.svg') no-repeat center;
   z-index: -2;
-  //transition: all 0.35s ease-in-out;
+  transition: all 0.5s ease-in-out;
   .container{
     background: $white;
     height: rem(214);
@@ -18,6 +18,7 @@
     border-radius: 50%;
     margin: 0 auto;
     cursor: pointer;
+    //transition: all 0.35s ease-in-out;
   }
   .rock{
     position: relative;
@@ -75,11 +76,12 @@
     align-items: center;
   }
   #play-again-btn{
-     display: none;
-     //grid-area: 2 / 2 / 3 / 3;
+     //display: none;
+     opacity: 0;
      text-align: center;
+     transition: all 0.05s linear;
+     grid-area: 2 / 2 / 3 / 3;
      button{
-        //transition: all 0.35s ease-in-out;
         font-size: rem(14);
         color: $darktext;
         letter-spacing: rem(3.5);
@@ -116,7 +118,11 @@
 .play-game .rock.not-picked,
 .play-game .scissors.not-picked,
 .play-game .paper.not-picked{
-  display: none;
+  //display: none;
+  opacity: 0;
+  height: 0%;
+  width: 0%;
+  position: absolute;
 }
 
 .play-game .rock.yes-picked,
@@ -124,6 +130,7 @@
 .play-game .paper.yes-picked{
   border: none; 
   grid-area: 2 / 1 / 3 / 2;
+  transition: all 0.25s ease-in-out;
   div img{
     transform: scale(2);
   }
@@ -131,18 +138,35 @@
 .play-game .rock.winner,
 .play-game .scissors.winner,
 .play-game .paper.winner{
-  display: block; 
-  border: none;
+  //display: inherit; 
+  opacity: 1;
+  border:hidden;
   grid-area: 2 / 3 / 3 / 4;
+  transition: all 0.25s ease-in-out;
   div img{
     transform: scale(2);
   }
 } 
-
-// .play-game .scissors.winner::before{
-//   background: linear-gradient($scissorsgradient2, $scissorsgradient);
-//   border-bottom: solid rem(10) hsl(34, 89%, 38%);
-// }
+.play-game .rock.win-animation,
+.play-game .scissors.win-animation,
+.play-game .paper.win-animation{
+    //background: transparent;
+    box-shadow: 0 0 0 0 $rockgradient;
+    animation: pulse 1.35s infinite;
+  @keyframes pulse{
+    0% {
+      box-shadow: 0 0 0 0 hsla(0, 0%, 100%, 0.06),
+                  0 0 0 0 hsla(0, 0%, 100%, 0.05),
+                  0 0 0 0 hsla(0, 0%, 100%, 0.04);
+    }
+    100% {
+      box-shadow: 0 0 0 100px hsla(0, 0%, 100%, 0.04),
+                  0 0 0 200px hsla(0, 0%, 100%, 0.03),
+                  0 0 0 300px hsla(0, 0%, 100%, 0.02);
+    }
+  }
+  
+}
 
 .play-game.yes-picked{
   background-image: none;
@@ -152,13 +176,15 @@
     background: $radialgradient2;
     padding: rem(10) rem(10);
     border-radius: 50%;
-  grid-area: 2 / 3 / 3 / 4;
+    z-index: -2;
+    grid-area: 2 / 3 / 3 / 4;
   }
 }
 
 
 .play-game .who-picks.yes-picked{
    display: inherit;
+   //opacity: 1;
    grid-template-columns: 1fr 1fr 1fr;
    grid-gap: inherit;
    text-align: center;
@@ -170,6 +196,7 @@
 }
 
 .play-game #play-again-btn.yes-picked{
-   display: block;
+   //display: block;
+   opacity: 1;
    grid-area: 2 / 2 / 3 / 3;
 }
