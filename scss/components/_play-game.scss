@@ -6,8 +6,8 @@
   grid-auto-columns: 1fr 1fr 1fr;
   grid-auto-rows: minmax(min-content, max-content);
   margin: 0 auto;
-  padding-top: rem(66);
   gap: rem(25) rem(66);
+  padding: rem(66) 0 rem(66);
   background: url('/images/bg-triangle.svg') no-repeat center;
   z-index: -2;
   transition: all 0.5s ease-in-out;
@@ -81,6 +81,7 @@
      text-align: center;
      transition: all 0.05s linear;
      grid-area: 2 / 2 / 3 / 3;
+     z-index: 0;
      button{
         font-size: rem(14);
         color: $darktext;
@@ -99,6 +100,24 @@
        padding-bottom: rem(18)
      }
   }
+}
+
+#overlay{
+  position: fixed; /* Sit on top of the page content */
+  display: none; /* Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  //background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  //cursor: pointer; /* Add a pointer on hover */
+}
+
+#overlay.yes-picked{
+  display: block;
 }
 
 .play-game .paper,
@@ -165,13 +184,13 @@
                   0 0 0 300px hsla(0, 0%, 100%, 0.02);
     }
   }
-  
 }
 
 .play-game.yes-picked{
   background-image: none;
-  padding-top: rem(172);
+  padding-top: rem(82);
   column-gap: rem(75);
+  z-index: 0;
   #computer-choice{
     background: $radialgradient2;
     padding: rem(10) rem(10);
@@ -195,8 +214,86 @@
    }
 }
 
-.play-game #play-again-btn.yes-picked{
+#play-again-btn.yes-picked{
    //display: block;
    opacity: 1;
    grid-area: 2 / 2 / 3 / 3;
+   z-index: 1000;
+}
+
+//-------------------breakpoints-----------------
+
+.play-game {
+  @include breakpoint-down(phone){
+    padding-top: rem(126);
+  .container{
+    height: rem(175);
+    width: rem(175);
+    
+  }
+  .rock div img,
+  .scissors div img,
+  .paper div img{
+    transform: scale(1.5);
+  }
+  .rock, 
+  .paper,
+  .scissors{
+    $border: rem(5);
+    border: solid $border transparent;  
+  }
+  .rock.winner, 
+  .paper.winner,
+  .scissors.winner{
+    grid-area: 2 / 2 / 3 / 3;
+  }
+  .rock.yes-picked, 
+  .paper.yes-picked,
+  .scissors.yes-picked{
+    //border: solid;
+    div img{
+      transform: scale(1.5);
+    }
+
+  }
+  &.yes-picked{
+    column-gap: rem(150);
+    padding: rem(66) 0 rem(66);
+  }
+  #play-again-btn.yes-picked{
+    grid-area: 3 / 1 / 3 / 3;
+  }
+  &.yes-picked #computer-choice{
+    grid-area: 2 / 2 / 3 / 3;
+    height: rem(185);
+    width: rem(185);
+  }
+  .who-picks.yes-picked{
+    grid-template-columns: 1fr 1fr;
+    grid-area: 1 / 1 / 2 / 3;
+    p:nth-child(2){
+      grid-area: 1 / 2 / 2 / 3;
+    }
+  }
+  }
+}
+
+.play-game .rock.win-animation,
+.play-game .scissors.win-animation,
+.play-game .paper.win-animation{
+    //background: transparent;
+  @include breakpoint-down(phone){
+  @keyframes pulse{
+    0% {
+      box-shadow: 0 0 0 0 hsla(0, 0%, 100%, 0.06),
+                  0 0 0 0 hsla(0, 0%, 100%, 0.05),
+                  0 0 0 0 hsla(0, 0%, 100%, 0.04);
+    }
+    100% {
+      box-shadow: 0 0 0 65px hsla(0, 0%, 100%, 0.04),
+                  0 0 0 120px hsla(0, 0%, 100%, 0.03),
+                  0 0 0 180px hsla(0, 0%, 100%, 0.02);
+    }
+  }
+}
 }

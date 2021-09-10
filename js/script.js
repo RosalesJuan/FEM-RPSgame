@@ -19,6 +19,7 @@ rulesButtons.forEach(button => {
 const rpsButton = document.querySelectorAll('#rps-button')
 const playGame = document.querySelector('.play-game')
 const parentAll = document.querySelectorAll('#parent-all')
+const overlay = document.querySelector('#overlay')
 
 const rockButton = document.querySelector('.rock')
 const paperButton = document.querySelector('.paper')
@@ -33,6 +34,8 @@ const showScore = document.querySelector('.show-score')
 const selectItem = () =>{
   playGame.classList.add('yes-picked')
   whoPick.classList.add('yes-picked')
+  //rulesContainer.classList.add('yes-picked')
+  overlay.classList.add('yes-picked')
   if(rockButton.classList.contains('yes-picked')){
     paperButton.classList.add('not-picked')
     scissorButton.classList.add('not-picked')
@@ -134,6 +137,7 @@ const resetPage = () => {
   toReset.forEach(n => n.classList.remove('winner'))
   toReset.forEach(n => n.classList.remove('not-picked'))
   toReset.forEach(n => n.classList.remove('win-animation'))
+  overlay.classList.remove('yes-picked')
   computerPlayer.innerHTML = ''
 }
 
@@ -145,21 +149,7 @@ const updatePoints = (winner) =>{
     showScore.innerHTML = points
   }
 }
-
-// handler function
-const handler = (e) => {
-	// remove this handler
-	e.removeEventListener('click', ()=>{ 
-    updateDisplay('rock', winner) 
-    updatePoints(winner)
-    selectItem()
-
-  })
-
-	//alert("You'll only see this once!");
-}
-//while (!rulesButtons.clicked){
-
+//----------------------EVENT BUTTONS----------------
   playAgainBtn.addEventListener('click', () =>{ 
       resetPage()
       console.log('butto presed')
@@ -172,10 +162,8 @@ const handler = (e) => {
     setTimeout( function () {
       updateDisplay('rock', winner) 
       updatePoints(winner)
-    }, 1200);
-    //handler(rockButton)
+    }, 1200)
   })
-
 
   paperButton.addEventListener('click', ()=>{
     let winner = chooseWinner('paper')
@@ -187,7 +175,6 @@ const handler = (e) => {
     }, 1200);
   })
 
-
   scissorButton.addEventListener('click', ()=>{
     scissorButton.classList.add('yes-picked')
     selectItem()
@@ -197,6 +184,8 @@ const handler = (e) => {
       updatePoints(winner)
     }, 1200);
   })
+
+
 //}
 // rockButton.addEventListener('click', ()=>{
 //    rockButton.classList.add('yes-picked')

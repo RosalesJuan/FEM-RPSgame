@@ -2,7 +2,6 @@
 @use './color' as *;
 
 .score-table{
-
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -32,5 +31,17 @@
       color: $darktext;
       justify-content: center;
     }
+  }
+}
+
+.score-table{
+  @include breakpoint-down(tablet){
+    width: 75%;
+  }
+}
+
+.score-table{
+  @include breakpoint-down(phone){
+    width: 95%;
   }
 }

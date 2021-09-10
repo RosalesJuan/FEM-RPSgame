@@ -22,3 +22,22 @@
   width: 100%;
   height: 100%;
 }
+
+$breakpoints-up: ("phone": "40em", "tablet":"64em", "desktop": "87.5em");
+$breakpoints-down: ("smallphone": "23.5em", "phone": "39.9375em", "tablet":"63.9375em", "desktop": "87.4375em");
+
+@media (min-width: 64em){
+
+}
+
+@mixin breakpoint-up($size){
+  @media (min-width: map-get($breakpoints-up, $size)){
+    @content;
+  }
+}
+
+@mixin breakpoint-down($size) {
+  @media(max-width: map-get($breakpoints-down, $size)){
+    @content;
+  }
+}
