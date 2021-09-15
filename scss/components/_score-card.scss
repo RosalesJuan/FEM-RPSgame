@@ -45,3 +45,19 @@
     width: 95%;
   }
 }
+
+.score-table{
+  @include breakpoint-down(smallphone){
+    width: 100%;
+    div p{
+      line-height: rem(14);
+      font-size: rem(18);
+      }
+    .score-card{
+      padding: rem(12) rem(24) rem(14);
+      .show-score{
+        font-size: rem(30);
+      }
+    }
+  }
+}

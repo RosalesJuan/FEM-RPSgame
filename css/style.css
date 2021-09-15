@@ -161,6 +161,22 @@ section {
   }
 }
 
+@media (max-width: 23.5em) {
+  .score-table {
+    width: 100%;
+  }
+  .score-table div p {
+    line-height: 0.875rem;
+    font-size: 1.125rem;
+  }
+  .score-table .score-card {
+    padding: 0.75rem 1.5rem 0.875rem;
+  }
+  .score-table .score-card .show-score {
+    font-size: 1.875rem;
+  }
+}
+
 .play-game {
   display: grid;
   grid-auto-columns: 1fr 1fr 1fr;
@@ -427,7 +443,13 @@ section {
   .play-game .rock,
 .play-game .paper,
 .play-game .scissors {
-    border: solid 0.3125rem transparent;
+    border: solid 1rem transparent;
+  }
+  .play-game .rock::before,
+.play-game .paper::before,
+.play-game .scissors::before {
+    margin: -1rem;
+    /* !importanté */
   }
   .play-game .rock.winner,
 .play-game .paper.winner,
@@ -444,7 +466,7 @@ section {
     padding: 4.125rem 0 4.125rem;
   }
   .play-game #play-again-btn.yes-picked {
-    grid-area: 3/1/3/3;
+    grid-area: 3/1/4/3;
   }
   .play-game.yes-picked #computer-choice {
     grid-area: 2/2/3/3;
@@ -468,6 +490,64 @@ section {
     100% {
       box-shadow: 0 0 0 65px rgba(255, 255, 255, 0.04), 0 0 0 120px rgba(255, 255, 255, 0.03), 0 0 0 180px rgba(255, 255, 255, 0.02);
     }
+  }
+}
+
+@media (max-width: 23.5em) {
+  .play-game {
+    padding: 6rem 0 6rem;
+    gap: 1rem 3.25rem;
+    background-position: center center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+  }
+  .play-game .container {
+    height: 8.125rem;
+    width: 8.1875rem;
+  }
+  .play-game .rock div img,
+.play-game .scissors div img,
+.play-game .paper div img {
+    transform: scale(0.95);
+  }
+  .play-game .rock.yes-picked,
+.play-game .paper.yes-picked,
+.play-game .scissors.yes-picked {
+    grid-area: 1/1/2/2;
+  }
+  .play-game .rock.yes-picked div img,
+.play-game .paper.yes-picked div img,
+.play-game .scissors.yes-picked div img {
+    transform: scale(0.95);
+  }
+  .play-game.yes-picked {
+    column-gap: 3.125rem;
+  }
+  .play-game.yes-picked #computer-choice {
+    grid-area: 1/2/2/3;
+    height: 7.8125rem;
+    width: 7.8125rem;
+  }
+  .play-game .rock.winner,
+.play-game .paper.winner,
+.play-game .scissors.winner {
+    grid-area: 1/2/2/3;
+  }
+  .play-game .rock.winner div img,
+.play-game .paper.winner div img,
+.play-game .scissors.winner div img {
+    transform: scale(0.95);
+  }
+  .play-game #play-again-btn {
+    grid-area: 2/1/3/3;
+    z-index: -2;
+  }
+  .play-game #play-again-btn.yes-picked {
+    z-index: 4;
+  }
+  .play-game .who-picks.yes-picked {
+    padding-top: 1.75rem;
+    grid-area: 2/1/3/3;
   }
 }
 

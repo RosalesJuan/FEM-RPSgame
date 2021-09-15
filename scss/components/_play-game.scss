@@ -225,11 +225,10 @@
 
 .play-game {
   @include breakpoint-down(phone){
-    padding-top: rem(126);
+  padding-top: rem(126);
   .container{
     height: rem(175);
     width: rem(175);
-    
   }
   .rock div img,
   .scissors div img,
@@ -239,8 +238,11 @@
   .rock, 
   .paper,
   .scissors{
-    $border: rem(5);
-    border: solid $border transparent;  
+    $border: rem(16);
+    border: solid $border transparent;
+    &::before {
+      margin: -$border; /* !importanté */
+    }
   }
   .rock.winner, 
   .paper.winner,
@@ -261,7 +263,7 @@
     padding: rem(66) 0 rem(66);
   }
   #play-again-btn.yes-picked{
-    grid-area: 3 / 1 / 3 / 3;
+    grid-area: 3 / 1 / 4 / 3;
   }
   &.yes-picked #computer-choice{
     grid-area: 2 / 2 / 3 / 3;
@@ -296,4 +298,58 @@
     }
   }
 }
+}
+
+.play-game{
+  @include breakpoint-down(smallphone){
+    padding: rem(96) 0 rem(96);
+    gap: rem(16) rem(52);
+    background-position: center center;
+    background-size: 70%;
+    background-repeat: no-repeat;
+    .container{
+      height: rem(130);
+      width: rem(131);
+    }
+    .rock div img,
+    .scissors div img,
+    .paper div img{
+      transform: scale(0.95);
+    }
+    .rock.yes-picked, 
+    .paper.yes-picked,
+    .scissors.yes-picked{
+      grid-area: 1 / 1 / 2 / 2;
+      div img{
+        transform: scale(0.95);
+      }
+    }
+    &.yes-picked{
+      column-gap: rem(50);
+    }
+    &.yes-picked #computer-choice{
+      grid-area: 1 / 2 / 2 / 3;
+      height: rem(125);
+      width: rem(125);
+    }
+    .rock.winner, 
+    .paper.winner,
+    .scissors.winner{
+      grid-area: 1 / 2 / 2 / 3;
+      div img{
+        transform: scale(0.95);
+      }
+    }
+    #play-again-btn{
+      grid-area: 2 / 1 / 3 / 3;
+      z-index: -2;
+    }
+    #play-again-btn.yes-picked{
+      z-index: 4;
+    }
+    .who-picks.yes-picked{
+      padding-top: rem(28);
+      grid-area: 2 / 1 / 3 / 3;
+    }
+  }
 }
